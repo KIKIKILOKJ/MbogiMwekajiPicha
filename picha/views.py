@@ -10,7 +10,7 @@ def picha_of_day(request):
     date = dt.date.today()
     # FUNCTION TO CONVERT DATE OBJECT TO FIND EXACT DAY
     day = convert_dates(date)
-    
+
     html = f'''
         <html>
             <body>
@@ -21,7 +21,7 @@ def picha_of_day(request):
     return HttpResponse(html)
 
 def convert_dates(dates):
-    
+
     # Function that gets the weekday number for the date.
     day_number = dt.date.weekday(dates)
 
