@@ -18,7 +18,7 @@ def picha_of_day(request):
             </body>
         </html>
             '''
-    return HttpResponse(html)
+    return render(request, 'all-pics/today-pics.html', {"date": date,})
 
 def convert_dates(dates):
 
@@ -32,15 +32,16 @@ def convert_dates(dates):
     return day
 
 def past_days_picha(request,past_date):
-    # Converts data from the string Url
-    date = dt.datetime.strptime(past_date,'%Y-%m-%d').date()
+    try:
+        # Converts data from the string Url
+        date = dt.datetime.strptime(past_date, '%Y-%m-%d').date()
 
-    day = convert_dates(date)
-    html = f'''
-        <html>
-            <body>
-                <h1>picha for {day} {date.day}-{date.month}-{date.year}</h1>
-            </body>
-        </html>
-        '''
-    return HttpResponse(html)
+    except ValueError:
+        # Raise 404 error when ValueError is thrown
+        raise Http404()
+        assert False
+
+    if date == dt.date.today():
+        return redirect(picha_of_day)
+
+    return render(request, 'all-pics/past-pics.html', {"date": date})
