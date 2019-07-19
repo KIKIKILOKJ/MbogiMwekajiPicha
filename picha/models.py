@@ -40,3 +40,11 @@ class Category(models.Model):
     def update_category(self, update):
         self.photo_category = update
         self.save()
+        
+    @classmethod
+    def get_category_id(cls, id):
+        category = Category.objects.get(pk = id)
+        return category
+
+    def __str__(self):
+        return self.photo_category
