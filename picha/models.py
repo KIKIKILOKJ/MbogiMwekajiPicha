@@ -19,3 +19,11 @@ class Location(models.Model):
     def update_location(self, update):
         self.photo_location = update
         self.save()
+        
+    @classmethod
+    def get_location_id(cls, id):
+        locate = Location.objects.get(pk = id)
+        return locate
+
+    def __str__(self):
+        return self.photo_location
