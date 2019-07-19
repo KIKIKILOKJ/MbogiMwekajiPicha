@@ -1,12 +1,7 @@
 from django.db import models
 
 # Create your models here.
-class Image(models.Model):
-    name = models.CharField(max_length=30)
-    description = models.TextField()
-    location = models.ForeignKey(Location)
-    category = models.ForeignKey(Category)
-    
+
 class Location(models.Model):
     photo_location = models.CharField(max_length=50)
 
@@ -48,3 +43,10 @@ class Category(models.Model):
 
     def __str__(self):
         return self.photo_category
+
+class Image(models.Model):
+    name = models.CharField(max_length=30)
+    description = models.TextField()
+    location = models.ForeignKey(Location)
+    category = models.ForeignKey(Category)
+    
