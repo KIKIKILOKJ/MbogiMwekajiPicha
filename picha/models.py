@@ -3,7 +3,8 @@ from django.db import models
 # Create your models here.
 
 class Location(models.Model):
-    photo_location = models.CharField(max_length=50)
+    id
+    picha_location = models.CharField(max_length=30)
 
     def save_location(self):
         self.save()
@@ -24,7 +25,7 @@ class Location(models.Model):
         return self.photo_location
     
 class Category(models.Model):
-    photo_category = models.CharField(max_length=50)
+    picha_category = models.CharField(max_length=30)
 
     def save_category(self):
         self.save()
@@ -49,4 +50,5 @@ class Image(models.Model):
     description = models.TextField()
     location = models.ForeignKey(Location)
     category = models.ForeignKey(Category)
-    
+    class Meta:
+        ordering = ('-id',)
