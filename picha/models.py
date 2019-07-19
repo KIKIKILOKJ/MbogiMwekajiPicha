@@ -52,3 +52,12 @@ class Image(models.Model):
     category = models.ForeignKey(Category)
     class Meta:
         ordering = ('-id',)
+        
+    def save_image(self):
+            self.save()
+    
+    def delete_image(self):
+        self.delete()
+    
+    def __str__(self):
+        return self.name
