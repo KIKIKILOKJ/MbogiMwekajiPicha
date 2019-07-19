@@ -4,7 +4,7 @@ from django.db import models
 
 class Location(models.Model):
     id
-    picha_location = models.CharField(max_length=30)
+    picture_location = models.CharField(max_length=30)
 
     def save_location(self):
         self.save()
@@ -25,7 +25,7 @@ class Location(models.Model):
         return self.photo_location
     
 class Category(models.Model):
-    picha_category = models.CharField(max_length=30)
+    picture_category = models.CharField(max_length=30)
 
     def save_category(self):
         self.save()
