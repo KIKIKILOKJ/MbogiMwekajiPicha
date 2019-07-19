@@ -50,6 +50,7 @@ class Image(models.Model):
     description = models.TextField()
     location = models.ForeignKey(Location)
     category = models.ForeignKey(Category)
+    pub_date = models.DateTimeField(auto_now_add=True)
     class Meta:
         ordering = ('-id',)
         
