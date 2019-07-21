@@ -1,13 +1,15 @@
 from django.shortcuts import render
 from django.http  import HttpResponse
 import datetime as dt
+from .models import Image
 
 # Create your views here.
-def welcome(request):
-    return render(request,'welcome.html')
+# def welcome(request):
+#     return render(request,'welcome.html')
 
 def picha_of_day(request):
     date = dt.date.today()
+    #pics=Image.todays_pics
     # FUNCTION TO CONVERT DATE OBJECT TO FIND EXACT DAY
     day = convert_dates(date)
 
@@ -18,7 +20,7 @@ def picha_of_day(request):
             </body>
         </html>
             '''
-    return render(request, 'all-pics/today-pics.html', {"date": date,})
+    return render(request, 'all-pics/today-pics.html', {"date": date})
 
 def convert_dates(dates):
 
@@ -44,4 +46,5 @@ def past_days_picha(request,past_date):
     if date == dt.date.today():
         return redirect(picha_of_day)
 
-    return render(request, 'all-pics/past-pics.html', {"date": date})
+    pics = Image.days_pics(date)
+    return render(request, 'all-pics/past-pics.html', {"date": date,"pics":pics})
