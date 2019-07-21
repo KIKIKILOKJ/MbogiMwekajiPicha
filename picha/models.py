@@ -34,8 +34,8 @@ class Category(models.Model):
     def delete_category(self):
         self.delete()
 
-    def __str__(self):
-            return self.category
+    # def __str__(self):
+    #     return self.category
 
     # def update_category(self, update):
     #     self.photo_category = update
