@@ -57,3 +57,10 @@ def search_by_category(request):
     else:
         message = "You haven't searched for any category"
         return render(request, 'all-pics/search.html',{"message":message})
+
+def search_by_location(request):
+    locations = Location.objects.all()
+    images = Image.search_by_location(location)
+    print(images)
+    title = f'{location} Photos'
+    return render(request, 'location.html', {'title': title, 'images': images, 'locations': locations})
