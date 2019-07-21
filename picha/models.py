@@ -62,6 +62,7 @@ class Image(models.Model):
     location = models.ForeignKey(Location)
     category = models.ForeignKey(Category)
     pub_date = models.DateTimeField(auto_now_add=True)
+    picha_image = models.ImageField(upload_to = 'picha/')
     
     @classmethod
     def search_by_title(cls,search_term):
