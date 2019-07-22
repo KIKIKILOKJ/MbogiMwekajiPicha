@@ -8,9 +8,6 @@ from .models import Image,Location,Category
 # #     return render(request,'welcome.html')
 
 
-
-#     return render(request, 'location.html', {'title': title, 'images': images, 'locations': locations})
-
 def index(request):
     images = Image.objects.all()
     locations = Location.objects.all()
