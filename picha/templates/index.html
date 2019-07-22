@@ -4,11 +4,7 @@
     <div class="container-fluid">
         
         {% for image in images %}
-        <a><img src="{{image.image_path.url}}" alt="{{image.name}}" class="img-fluid" style="height:400px;width:400px;" data-toggle="modal"data-target="{{image.id}}"></a>
-        {% endfor %}
-        <div class="row">
-            {% for image in images %}
-            <!-- Modal -->
+         <!-- Modal -->
             <div class="modal fade" id="basicExampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
             aria-hidden="true">
                 <div class="modal-dialog" role="document">    
@@ -20,7 +16,7 @@
                             <span aria-hidden="true">&times;</span></button>
                         </div>
                         <div class="modal-body">
-                            <img src="{{image.image_path.url}}" style="height:40px;width:40px;" alt="" class="img-fluid">
+                        <a><img src="{{image.image_path.url}}" alt="{{image.name}}" class="img-fluid" style="height:400px;width:400px;" data-toggle="modal"data-target="{{image.id}}"></a>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#{{image.id}}-info">Info</button>
@@ -30,7 +26,8 @@
 
                 </div>
             </div>
-            {% endfor %}
-        </div>
+        <a><img src="{{image.image_path.url}}" alt="{{image.name}}" class="img-fluid" style="height:400px;width:400px;" data-toggle="modal"data-target="{{image.id}}"></a>
+        {% endfor %}
+        
     </div>
 {% endblock %}
