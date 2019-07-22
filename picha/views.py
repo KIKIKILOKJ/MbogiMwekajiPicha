@@ -44,7 +44,7 @@ def index(request):
 #     return render(request, 'all-pics/past-pics.html', {"date": date,"pics":pics})
 
 def search_by_category(request):
-    
+
     if 'image' in request.GET and request.GET["image"]:
         search_term = request.GET.get("image")
         print(search_term)
