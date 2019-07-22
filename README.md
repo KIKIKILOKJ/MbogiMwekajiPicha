@@ -43,3 +43,6 @@ Now navigate to your browser at: ```localhost:8000```
 
 # Contact info
 Incase of any challenges or questions, feel free to reach outh via email(petermax2004@gmail.com)
+
+# Licence 
+[MIT](LICENSE)
