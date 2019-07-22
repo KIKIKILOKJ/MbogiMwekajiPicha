@@ -1,31 +1,24 @@
 {% load bootstrap3 %}
-{% load static%}
+{% load static %}
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-  {% if title %}
-  <title>MwekajiPicha - {{title}}</title>
-  {% else %}
-    <title> GALLERIO </title>
-  {% endif %}
-
-  {% block styles %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>GALLERIA</title>
+    {% block styles %} 
     {% bootstrap_css %}
-    <link rel="stylesheet" href="{% static 'css/basepics.css' %}">
-     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link href='https://fonts.googleapis.com/css?family=Cambay' rel='stylesheet'>
-        <link href='https://fonts.googleapis.com/css?family=Questrial' rel='stylesheet'>
-  {% endblock %}
-
-</head>
-<body>
-    {% include "navbar.html" %}
-    {% block scripts %}
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-     {% bootstrap_javascript %}
     {% endblock %}
+</head>
+
+<body>
+    {% block content %} 
+    {% include 'navbar.html' %}
+    {% endblock %}
+    
+
 </body>
+
 </html>

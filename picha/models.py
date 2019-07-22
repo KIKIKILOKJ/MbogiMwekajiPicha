@@ -1,108 +1,123 @@
 from django.db import models
-import datetime as dt
-
-# Create your models here.
-
-class Location(models.Model):
-    location = models.CharField(max_length=30)
-    
-    class Meta:
-        ordering = ('location',)
-
-    def save_location(self):
-        self.save()
-
-    def delete_location(self):
-        self.delete()
-
-    # def update_location(self, update):
-    #     self.photo_location = update
-    #     self.save()
-
-    # @classmethod
-    # def get_location_id(cls, id):
-    #     locate = Location.objects.get(pk = id)
-    #     return locate
-
 
 class Category(models.Model):
-    picture_category = models.CharField(max_length=30)
+    '''
+    Category class that creates category objects.
+    '''
+    name = models.CharField(max_length = 30)
+
+    def __str__(self):
+        return self.name
 
     def save_category(self):
+        '''
+          Method that saves the categories in the database.
+        '''
         self.save()
 
+    def update_category(self, cate):
+        '''
+          Method that updates the categories in the database.
+        '''
+        self.update(name = cate)
+
     def delete_category(self):
+        '''
+          Method that deletes the categories in the database.
+        '''
         self.delete()
 
-    # def __str__(self):
-    #     return self.category
+class Location(models.Model):
+    '''
+    Location class that creates location objects.
+    '''
+    name = models.CharField(max_length = 30)
 
-    # def update_category(self, update):
-    #     self.photo_category = update
-    #     self.save()
+    def __str__(self):
+        return self.name
 
-    # @classmethod
-    # def get_category_id(cls, id):
-    #     category = Category.objects.get(pk = id)
-    #     return category
+    def save_location(self):
+        '''
+          Method that saves the locations in the database.
+        '''
+        self.save()
 
-    # @classmethod
-    # def todays_picha(cls,date):
-    #     today =dt.date.today()
-    #     picha=cls.objects.filter(pub_date__date=today)
-    #     return picha
+    def update_location(self, loc):
+        '''
+          Method that updates the locations in the database.
+        '''
+        self.update(name = loc)
 
-    # @classmethod
-    # def days_picha(cls,date):
-    #     picha = cls.objects.filter(pub_date__date = date)
-    #     return picha
-
-    # def __str__(self):
-    #     return self.photo_category
-
+    def delete_location(self):
+        '''
+          Method that deletes the locations in the database.
+        '''
+        self.delete()
+    
 class Image(models.Model):
-    name = models.CharField(max_length=30)
-    description = models.TextField(max_length =50)
-    location = models.ForeignKey(Location, on_delete=models.CASCADE,)
-    category = models.ManyToManyField(Category)
-    pub_date = models.DateTimeField(auto_now_add=True)
-    picha_image = models.ImageField(upload_to = 'images/')
-    
-    @classmethod
-    def search_by_category(cls,search_term):
-        images = cls.objects.filter(title__icontains=search_term)
-        return images
-    
-    @classmethod
-    def update_image_by_id(cls,id):
-        image = cls.objects.update(id=id)
-        return image
-    
-    @classmethod
-    def search_by_location(cls,search_term):
-        image = Image.objects.filter(location__id=search_term).all()
-        return image
-    
-    @classmethod
-    def get_all_images(cls):
-        images = cls.objects.all()
-        return images
-    
-    @classmethod
-    def get_image_by_id(cls,id):
-        image = cls.objects.filter(id=id)
-        return image
-    
-    @classmethod
-    def delete_image_by_id(cls,id):
-        image = cls.objects.remove(id=id)
-        return image
+    '''
+    Image class that creates image objects.
+    '''
+    name = models.CharField(max_length = 30)
+    description = models.TextField()
+    image_path = models.ImageField(upload_to = 'images/')
+    category = models.ForeignKey(Category)
+    location = models.ForeignKey(Location)
+
+    def __str__(self):
+        return self.name
 
     def save_image(self):
-            self.save()
+        '''
+          Method that saves the images in the database.
+        '''
+        self.save()
+
+    def update_image(self, img):
+        '''
+          Method that updates the images in the database.
+        '''
+        self.update(name = img)
 
     def delete_image(self):
+        '''
+          Method that deletes the images in the database.
+        '''
         self.delete()
 
-    # def __str__(self):
-    #     return self.image_name
+    @classmethod
+    def all_images(cls):
+        '''
+          Method that returns all the images in the database.
+        '''
+        images = cls.objects.all()
+        return images
+
+    @classmethod
+    def search_by_category(cls,search_term):
+        '''
+          Method that retrieves an image in the database based on the category.
+        '''
+        images = cls.objects.filter(category__name__contains = search_term)
+        if len(images) < 1:
+            case_images = cls.objects.filter(category__name__contains = search_term.capitalize())
+            return case_images
+        else:
+            return images
+
+    @classmethod
+    def get_image_by_id(cls,id):
+        '''
+          Method that retrieves an image in the database based on its id.
+        '''
+        image = cls.objects.get(id = id)
+        return image
+
+    @classmethod
+    def filter_by_location(cls,search_term):
+        '''
+          Method that filters images in the database based on the location.
+        '''
+        location = Location.objects.get(name = search_term)
+        images = cls.objects.filter(location = location)
+        return images
